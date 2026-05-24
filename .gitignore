@@ -18,6 +18,7 @@ backend/.env
 frontend/.env
 **/.env
 **/.env.*
+**/add_envs.js
 
 # Logs
 logs

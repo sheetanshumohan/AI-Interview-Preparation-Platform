@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const { PDFParse } = require('pdf-parse');
+const pdf = require('pdf-parse');
 
 const calculateCompletionScore = (user) => {
     let score = 0;
@@ -102,10 +102,8 @@ const generateResumeAnalysis = async (user) => {
     if (user.resume && user.resume.url && user.resume.url.includes('base64')) {
         try {
             const dataBuffer = Buffer.from(user.resume.url.split(',')[1], 'base64');
-            const parser = new PDFParse({ data: dataBuffer });
-            const result = await parser.getText();
+            const result = await pdf(dataBuffer);
             extractedText = normalizeText(result.text);
-            await parser.destroy();
             
             // 2. Scan for Action Verbs (Impact)
             foundVerbs = powerVerbs.filter(verb => extractedText.includes(verb));
