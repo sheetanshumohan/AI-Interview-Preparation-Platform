@@ -1,8 +1,8 @@
 # 🤖 AI Interview Preparation Platform
 
 ### 🌐 Live Deployments
-- **Frontend App**: [https://frontend-snowy-eta-72.vercel.app](https://frontend-snowy-eta-72.vercel.app)
-- **Backend API**: [https://backend-delta-ochre-28.vercel.app](https://backend-delta-ochre-28.vercel.app)
+- **Frontend App**: [https://ai-interview-prep-frontend-kappa.vercel.app](https://ai-interview-prep-frontend-kappa.vercel.app)
+- **Backend API**: [https://ai-interview-prep-backend-eta.vercel.app](https://ai-interview-prep-backend-eta.vercel.app)
 - **GitHub Repository**: [https://github.com/sheetanshumohan/AI-Interview-Preparation-Platform](https://github.com/sheetanshumohan/AI-Interview-Preparation-Platform)
 
 ---
