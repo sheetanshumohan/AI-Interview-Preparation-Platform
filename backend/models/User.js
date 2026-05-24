@@ -14,11 +14,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: function() {
             // Password is only required if user is not using social login
-            return !this.googleId && !this.githubId;
+            return !this.googleId;
         }
     },
     googleId: String,
-    githubId: String,
     avatar: String,
     role: {
         type: String,

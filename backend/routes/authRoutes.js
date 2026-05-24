@@ -36,28 +36,5 @@ router.get('/google/callback', (req, res, next) => {
     })(req, res, next);
 });
 
-// GitHub OAuth
-router.get('/github', passport.authenticate('github', { scope: ['user:email'] }));
-router.get('/github/callback', (req, res, next) => {
-    passport.authenticate('github', { session: false }, (err, user, info) => {
-        if (err) return res.redirect(`${process.env.CLIENT_URL}/login?error=auth_failed`);
-        if (!user && info?.message === 'needs_registration') {
-            return res.redirect(`${process.env.CLIENT_URL}/register?error=needs_registration`);
-        }
-        if (!user) return res.redirect(`${process.env.CLIENT_URL}/login?error=auth_failed`);
-
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        });
-        const redirectUrl = user.isAdmin 
-            ? `${process.env.CLIENT_URL}/admin?token=${token}` 
-            : `${process.env.CLIENT_URL}/dashboard?token=${token}`;
-        res.redirect(redirectUrl);
-    })(req, res, next);
-});
 
 module.exports = router;
