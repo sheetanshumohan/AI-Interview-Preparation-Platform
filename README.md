@@ -1,6 +1,9 @@
 # 🤖 AI Interview Preparation Platform
 
-An intelligent, full-stack AI-powered Interview Preparation Platform that helps candidates practice, analyze, and excel in their interview prep. Leveraging state-of-the-art Generative AI (Google Gemini and OpenAI) along with a sleek, responsive modern UI, the platform offers mock interviews, resume analysis, real-time question generation, and in-depth performance analytics.
+### 🌐 Live Deployments
+- **Frontend App**: [https://frontend-snowy-eta-72.vercel.app](https://frontend-snowy-eta-72.vercel.app)
+- **Backend API**: [https://backend-delta-ochre-28.vercel.app](https://backend-delta-ochre-28.vercel.app)
+- **GitHub Repository**: [https://github.com/sheetanshumohan/AI-Interview-Preparation-Platform](https://github.com/sheetanshumohan/AI-Interview-Preparation-Platform)
 
 ---
 
