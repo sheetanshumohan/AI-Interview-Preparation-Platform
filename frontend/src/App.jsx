@@ -67,6 +67,16 @@ function App() {
   const { initTheme } = useThemeStore();
 
   useEffect(() => {
+    // Parse query params to extract OAuth token if redirected from social login
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    if (token) {
+        localStorage.setItem('token', token);
+        // Clean URL parameter
+        const newUrl = window.location.pathname + window.location.hash;
+        window.history.replaceState({}, document.title, newUrl);
+    }
+
     checkAuth();
     initTheme();
   }, [checkAuth, initTheme]);

@@ -29,7 +29,9 @@ router.get('/google/callback', (req, res, next) => {
             sameSite: 'strict',
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
-        const redirectUrl = user.isAdmin ? `${process.env.CLIENT_URL}/admin` : `${process.env.CLIENT_URL}/dashboard`;
+        const redirectUrl = user.isAdmin 
+            ? `${process.env.CLIENT_URL}/admin?token=${token}` 
+            : `${process.env.CLIENT_URL}/dashboard?token=${token}`;
         res.redirect(redirectUrl);
     })(req, res, next);
 });
@@ -51,7 +53,9 @@ router.get('/github/callback', (req, res, next) => {
             sameSite: 'strict',
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
-        const redirectUrl = user.isAdmin ? `${process.env.CLIENT_URL}/admin` : `${process.env.CLIENT_URL}/dashboard`;
+        const redirectUrl = user.isAdmin 
+            ? `${process.env.CLIENT_URL}/admin?token=${token}` 
+            : `${process.env.CLIENT_URL}/dashboard?token=${token}`;
         res.redirect(redirectUrl);
     })(req, res, next);
 });
