@@ -1,8 +1,7 @@
 import { create } from 'zustand';
-import axios from 'axios';
+import axiosInstance from '../lib/axios';
 
-const API_URL = 'http://localhost:5000/api/admin';
-axios.defaults.withCredentials = true;
+const API_URL = '/admin';
 
 export const useLogStore = create((set) => ({
     logs: [],
@@ -14,7 +13,7 @@ export const useLogStore = create((set) => ({
         try {
             const { severity = 'All', type = 'All', search = '' } = filters;
             const query = `severity=${severity}&type=${type}&search=${search}`;
-            const response = await axios.get(`${API_URL}/logs?${query}`);
+            const response = await axiosInstance.get(`${API_URL}/logs?${query}`);
             set({ logs: response.data.logs, isLoading: false });
         } catch (error) {
             console.error('Failed to fetch logs:', error);
@@ -24,7 +23,7 @@ export const useLogStore = create((set) => ({
 
     fetchLogStats: async () => {
         try {
-            const response = await axios.get(`${API_URL}/logs/stats`);
+            const response = await axiosInstance.get(`${API_URL}/logs/stats`);
             set({ stats: response.data.stats });
         } catch (error) {
             console.error('Failed to fetch log stats:', error);

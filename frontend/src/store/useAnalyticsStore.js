@@ -1,8 +1,7 @@
 import { create } from 'zustand';
-import axios from 'axios';
+import axiosInstance from '../lib/axios';
 
-const API_URL = 'http://localhost:5000/api/admin';
-axios.defaults.withCredentials = true;
+const API_URL = '/admin';
 
 export const useAnalyticsStore = create((set) => ({
     analytics: null,
@@ -13,7 +12,7 @@ export const useAnalyticsStore = create((set) => ({
         // Keep existing analytics data while loading to avoid UI flickering
         set({ isLoading: true });
         try {
-            const response = await axios.get(`${API_URL}/analytics?range=${encodeURIComponent(range)}`);
+            const response = await axiosInstance.get(`${API_URL}/analytics?range=${encodeURIComponent(range)}`);
             set({ 
                 analytics: response.data.analytics, 
                 isLoading: false,

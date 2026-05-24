@@ -155,14 +155,14 @@ const LoginForm = () => {
 
         <div className="grid grid-cols-2 gap-4">
           <button 
-            onClick={() => window.location.href = 'http://localhost:5000/api/auth/google'}
+            onClick={() => window.location.href = '/api/auth/google'}
             className="flex items-center justify-center gap-2 py-3 rounded-2xl bg-white text-black border border-gray-200 font-semibold text-sm hover:bg-gray-50 transition-all shadow-sm"
           >
             <FcGoogle className="w-5 h-5" />
             Google
           </button>
           <button 
-            onClick={() => window.location.href = 'http://localhost:5000/api/auth/github'}
+            onClick={() => window.location.href = '/api/auth/github'}
             className="flex items-center justify-center gap-2 py-3 rounded-2xl bg-[#1e293b] text-white font-semibold text-sm hover:bg-[#0f172a] transition-all border border-slate-700 shadow-sm"
           >
             <FaGithub className="w-5 h-5" />

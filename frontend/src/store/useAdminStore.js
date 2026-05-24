@@ -1,10 +1,9 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import axios from 'axios';
+import axiosInstance from '../lib/axios';
 import toast from 'react-hot-toast';
 
-const API_URL = 'http://localhost:5000/api/admin';
-axios.defaults.withCredentials = true;
+const API_URL = '/admin';
 
 export const useAdminStore = create(
     persist(
@@ -26,8 +25,8 @@ export const useAdminStore = create(
                 set({ isLoading: true });
                 try {
                     const [usersRes, statsRes] = await Promise.all([
-                        axios.get(`${API_URL}/users`),
-                        axios.get(`${API_URL}/stats`)
+                        axiosInstance.get(`${API_URL}/users`),
+                        axiosInstance.get(`${API_URL}/stats`)
                     ]);
                     set({ 
                         users: usersRes.data.users, 
@@ -43,7 +42,7 @@ export const useAdminStore = create(
             fetchStats: async () => {
                 set({ isLoading: true });
                 try {
-                    const response = await axios.get(`${API_URL}/stats`);
+                    const response = await axiosInstance.get(`${API_URL}/stats`);
                     set({ stats: response.data.stats, isLoading: false });
                 } catch (error) {
                     console.error('Failed to fetch admin stats:', error);
@@ -53,7 +52,7 @@ export const useAdminStore = create(
 
             updateUserStatus: async (userId, status) => {
                 try {
-                    await axios.put(`${API_URL}/users/${userId}/status`, { status });
+                    await axiosInstance.put(`${API_URL}/users/${userId}/status`, { status });
                     set((state) => ({
                         users: state.users.map(u => u.id === userId ? { ...u, status } : u)
                     }));
@@ -65,7 +64,7 @@ export const useAdminStore = create(
 
             deleteUser: async (userId) => {
                 try {
-                    await axios.delete(`${API_URL}/users/${userId}`);
+                    await axiosInstance.delete(`${API_URL}/users/${userId}`);
                     set((state) => ({
                         users: state.users.filter(u => u.id !== userId)
                     }));
@@ -77,12 +76,12 @@ export const useAdminStore = create(
 
             provisionUser: async (userData) => {
                 try {
-                    await axios.post(`${API_URL}/provision`, userData);
+                    await axiosInstance.post(`${API_URL}/provision`, userData);
                     toast.success('User provisioned successfully');
                     // Refresh data
                     const [usersRes, statsRes] = await Promise.all([
-                        axios.get(`${API_URL}/users`),
-                        axios.get(`${API_URL}/stats`)
+                        axiosInstance.get(`${API_URL}/users`),
+                        axiosInstance.get(`${API_URL}/stats`)
                     ]);
                     set({ 
                         users: usersRes.data.users, 
