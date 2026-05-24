@@ -42,3 +42,5 @@ backend/uploads/*
 !backend/uploads/.gitkeep
 temp/
 tmp/
+
+.vercel
