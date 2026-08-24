@@ -26,7 +26,7 @@ router.get('/google/callback', (req, res, next) => {
         res.cookie('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict'
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
         });
         const redirectUrl = user.isAdmin 
             ? `${process.env.CLIENT_URL}/admin?token=${token}` 

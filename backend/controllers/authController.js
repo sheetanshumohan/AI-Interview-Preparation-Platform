@@ -32,9 +32,9 @@ const signup = async (req, res) => {
         });
 
         res.cookie('token', token, {
-            httpOnly: true, // prevent XSS
+            httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict', // prevent CSRF
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
         });
 
         res.status(201).json({
@@ -75,11 +75,13 @@ const login = async (req, res) => {
             expiresIn: '7d'
         });
 
-        res.cookie('token', token, {
+        const cookieOptions = {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
-        });
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        };
+
+        res.cookie('token', token, cookieOptions);
 
         user.lastLogin = new Date();
         await user.save();
