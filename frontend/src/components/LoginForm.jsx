@@ -158,11 +158,8 @@ const LoginForm = () => {
           <button 
             onClick={() => {
               const isLocalhost = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-              const envApiUrl = import.meta.env.VITE_API_URL;
-              const fallbackUrl = isLocalhost ? '/api' : 'https://ai-interview-preparation-platform-514b.onrender.com/api';
-              const rawUrl = envApiUrl || fallbackUrl;
-              const baseApi = rawUrl.endsWith('/api') ? rawUrl : `${rawUrl.replace(/\/$/, '')}/api`;
-              window.location.href = `${baseApi}/auth/google`;
+              const backendUrl = isLocalhost ? 'http://localhost:5000/api/auth/google' : 'https://ai-interview-preparation-platform-514b.onrender.com/api/auth/google';
+              window.location.href = backendUrl;
             }}
             className="flex items-center justify-center gap-2 py-3 rounded-2xl bg-white text-black border border-gray-200 font-semibold text-sm hover:bg-gray-50 transition-all shadow-sm w-full"
           >

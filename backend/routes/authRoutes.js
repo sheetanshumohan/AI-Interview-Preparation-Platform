@@ -14,23 +14,25 @@ router.post('/logout', logout);
 // Google OAuth
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/google/callback', (req, res, next) => {
+    const clientUrl = (process.env.CLIENT_URL || 'https://ai-interview-preparation-platform-woad.vercel.app').replace(/\/$/, '');
+    
     passport.authenticate('google', { session: false }, (err, user, info) => {
-        if (err) return res.redirect(`${process.env.CLIENT_URL}/login?error=auth_failed`);
+        if (err) return res.redirect(`${clientUrl}/login?error=auth_failed`);
         if (!user && info?.message === 'needs_registration') {
-            return res.redirect(`${process.env.CLIENT_URL}/register?error=needs_registration`);
+            return res.redirect(`${clientUrl}/register?error=needs_registration`);
         }
-        if (!user) return res.redirect(`${process.env.CLIENT_URL}/login?error=auth_failed`);
+        if (!user) return res.redirect(`${clientUrl}/login?error=auth_failed`);
 
         // Success - Generate JWT
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET || 'prepai_jwt_secret_fallback_key_2026', { expiresIn: '7d' });
         res.cookie('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
         });
         const redirectUrl = user.isAdmin 
-            ? `${process.env.CLIENT_URL}/admin?token=${token}` 
-            : `${process.env.CLIENT_URL}/dashboard?token=${token}`;
+            ? `${clientUrl}/admin?token=${token}` 
+            : `${clientUrl}/dashboard?token=${token}`;
         res.redirect(redirectUrl);
     })(req, res, next);
 });
