@@ -181,7 +181,7 @@ erDiagram
     USER ||--o{ SAVED_QUESTION : contains
     USER ||--o{ MOCK_INTERVIEW_SESSION : records
     USER ||--o{ HR_PRACTICE_SESSION : records
-    USER ||--o1 RESUME_ANALYSIS : stores
+    USER ||--o| RESUME_ANALYSIS : stores
 
     USER {
         ObjectId _id PK
