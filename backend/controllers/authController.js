@@ -2,6 +2,8 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const JWT_SECRET = process.env.JWT_SECRET || 'prepai_jwt_secret_fallback_key_2026';
+
 const signup = async (req, res) => {
     const { name, email, password, role, experience } = req.body;
 
@@ -27,7 +29,7 @@ const signup = async (req, res) => {
         await user.save();
 
         // Generate JWT
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
             expiresIn: '7d'
         });
 
@@ -52,8 +54,8 @@ const signup = async (req, res) => {
         });
 
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: 'Server error' });
+        console.error("Signup Error:", error);
+        res.status(500).json({ success: false, message: error.message || 'Server error' });
     }
 };
 
@@ -71,7 +73,7 @@ const login = async (req, res) => {
             return res.status(400).json({ success: false, message: 'Invalid credentials' });
         }
 
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
             expiresIn: '7d'
         });
 
@@ -101,8 +103,8 @@ const login = async (req, res) => {
         });
 
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: 'Server error' });
+        console.error("Login Error:", error);
+        res.status(500).json({ success: false, message: error.message || 'Server error' });
     }
 };
 
@@ -120,9 +122,9 @@ const checkAuth = async (req, res) => {
 
         res.status(200).json({ success: true, user });
     } catch (error) {
-        console.log("Error in checkAuth ", error);
-        res.status(500).json({ success: false, message: "Server error" });
+        console.error("Error in checkAuth:", error);
+        res.status(500).json({ success: false, message: error.message || "Server error" });
     }
-}
+};
 
 module.exports = { signup, login, logout, checkAuth };
