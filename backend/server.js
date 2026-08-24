@@ -22,6 +22,7 @@ connectDB();
 const allowedOrigins = [
     'http://localhost:5173',
     'http://localhost:3000',
+    'https://ai-interview-preparation-platform-woad.vercel.app',
     'https://ai-interview-prep-frontend-kappa.vercel.app',
     process.env.CLIENT_URL ? process.env.CLIENT_URL.replace(/\/$/, '') : null
 ].filter(Boolean);

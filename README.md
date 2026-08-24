@@ -1,6 +1,6 @@
 # 🤖 AI Interview Preparation Platform (PrepAI)
 
-[![Live App](https://img.shields.io/badge/Frontend-Live%20Vercel%20App-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://ai-interview-prep-frontend-kappa.vercel.app/)
+[![Live App](https://img.shields.io/badge/Frontend-Live%20Vercel%20App-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://ai-interview-preparation-platform-woad.vercel.app/)
 [![Live API](https://img.shields.io/badge/Backend-Live%20Render%20API-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://ai-interview-preparation-platform-514b.onrender.com)
 [![License](https://img.shields.io/badge/License-ISC-blue?style=for-the-badge)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-v18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
