@@ -156,7 +156,13 @@ const LoginForm = () => {
 
         <div className="flex flex-col gap-4">
           <button 
-            onClick={() => window.location.href = '/api/auth/google'}
+            onClick={() => {
+              const envApiUrl = import.meta.env.VITE_API_URL;
+              const baseApi = envApiUrl 
+                ? (envApiUrl.endsWith('/api') ? envApiUrl : `${envApiUrl.replace(/\/$/, '')}/api`)
+                : '/api';
+              window.location.href = `${baseApi}/auth/google`;
+            }}
             className="flex items-center justify-center gap-2 py-3 rounded-2xl bg-white text-black border border-gray-200 font-semibold text-sm hover:bg-gray-50 transition-all shadow-sm w-full"
           >
             <FcGoogle className="w-5 h-5" />
