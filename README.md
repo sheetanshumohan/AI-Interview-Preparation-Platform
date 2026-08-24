@@ -1,7 +1,7 @@
 # 🤖 AI Interview Preparation Platform (PrepAI)
 
-[![Live App](https://img.shields.io/badge/Frontend-Live%20Vercel%20App-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://ai-interview-prep-frontend-kappa.vercel.app)
-[![Live API](https://img.shields.io/badge/Backend-Live%20Vercel%20API-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://ai-interview-prep-backend-eta.vercel.app)
+[![Live App](https://img.shields.io/badge/Frontend-Live%20Vercel%20App-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://ai-interview-prep-frontend-kappa.vercel.app/)
+[![Live API](https://img.shields.io/badge/Backend-Live%20Render%20API-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://ai-interview-preparation-platform-514b.onrender.com)
 [![License](https://img.shields.io/badge/License-ISC-blue?style=for-the-badge)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-v18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-v19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
@@ -578,35 +578,37 @@ Log in using these credentials at `http://localhost:5173/login` to access the Ad
 
 ## 🌐 Production Deployment Strategy
 
-### 1. Backend Deployment (Vercel Serverless / Node Container)
-The backend is structured to execute seamlessly on serverless platforms such as Vercel or container hosts like Render/Railway.
+### 🌐 Live Platform URLs
+- **Frontend Application (Vercel)**: [https://ai-interview-prep-frontend-kappa.vercel.app/](https://ai-interview-prep-frontend-kappa.vercel.app/)
+- **Backend API Service (Render)**: [https://ai-interview-preparation-platform-514b.onrender.com](https://ai-interview-preparation-platform-514b.onrender.com)
 
-A root/backend `vercel.json` routes incoming API traffic:
-```json
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "server.js"
-    }
-  ]
-}
-```
+---
+
+### 1. Backend Deployment (Render Web Service)
+The Express backend is deployed as a long-running Web Service on **Render**:
+- **Repository Link**: Connected to GitHub (`main` branch)
+- **Root Directory**: `backend`
+- **Environment / Runtime**: `Node`
+- **Build Command**: `npm install`
+- **Start Command**: `node server.js`
+- **Environment Variables**:
+  - `NODE_ENV`: `production`
+  - `PORT`: `5000` *(Or Render default `10000`)*
+  - `MONGO_URI`: `your_mongodb_atlas_connection_string`
+  - `JWT_SECRET`: `your_jwt_secret_key`
+  - `OPENAI_API_KEY`: `your_openai_api_key`
+  - `GOOGLE_CLIENT_ID`: `your_google_client_id`
+  - `GOOGLE_CLIENT_SECRET`: `your_google_client_secret`
+  - `CLIENT_URL`: `https://ai-interview-prep-frontend-kappa.vercel.app`
 
 ### 2. Frontend Deployment (Vercel SPA)
-- Connect the GitHub repository to Vercel.
-- Set Root Directory to `frontend`.
-- Build Command: `npm run build`
-- Output Directory: `dist`
-- Configure Environment Variables in Vercel Dashboard:
-  - `VITE_API_URL`: `https://ai-interview-prep-backend-eta.vercel.app/api`
+The React SPA frontend is deployed on **Vercel**:
+- **Framework Preset**: `Vite`
+- **Root Directory**: `frontend`
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Environment Variables**:
+  - `VITE_API_URL`: `https://ai-interview-preparation-platform-514b.onrender.com/api`
 
 ---
 
