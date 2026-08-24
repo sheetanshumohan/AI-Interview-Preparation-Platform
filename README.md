@@ -391,7 +391,6 @@ AI-Interview-Preparation-Platform/
 │   ├── uploads/                      # Temporary storage for audio processing
 │   ├── seedAdmin.js                  # CLI script to seed default admin identity
 │   ├── server.js                     # Main Express server entrypoint
-│   ├── vercel.json                   # Serverless deployment configuration for Vercel
 │   └── package.json
 │
 ├── frontend/
