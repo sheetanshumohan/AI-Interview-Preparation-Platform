@@ -96,7 +96,7 @@ const LoginForm = () => {
           <p className="text-[var(--text-muted)] text-sm font-semibold">Login to continue your interview preparation journey.</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4" autoComplete="off">
           <FloatingInput
             label="Email Address"
             id="email"
@@ -105,6 +105,7 @@ const LoginForm = () => {
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             error={errors.email}
+            autoComplete="off"
           />
 
           <FloatingInput
@@ -116,6 +117,7 @@ const LoginForm = () => {
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             showPasswordToggle={true}
             error={errors.password}
+            autoComplete="new-password"
           />
 
           <div className="flex items-center justify-between px-2 mb-2 font-semibold">

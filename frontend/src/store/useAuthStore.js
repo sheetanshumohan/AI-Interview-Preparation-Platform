@@ -10,12 +10,17 @@ export const useAuthStore = create((set) => ({
     message: null,
 
     checkAuth: async () => {
+        const token = sessionStorage.getItem('token');
+        if (!token) {
+            set({ isCheckingAuth: false, isAuthenticated: false });
+            return;
+        }
         set({ isCheckingAuth: true, error: null });
         try {
             const response = await axios.get("/auth/check-auth");
             set({ user: response.data.user, isAuthenticated: true, isCheckingAuth: false });
         } catch (error) {
-            localStorage.removeItem('token');
+            sessionStorage.removeItem('token');
             set({ isCheckingAuth: false, isAuthenticated: false });
         }
     },
@@ -25,7 +30,7 @@ export const useAuthStore = create((set) => ({
         try {
             const response = await axios.post("/auth/signup", { name, email, password, role, experience });
             if (response.data.token) {
-                localStorage.setItem('token', response.data.token);
+                sessionStorage.setItem('token', response.data.token);
             }
             set({ user: response.data.user, isAuthenticated: true, isLoading: false });
         } catch (error) {
@@ -39,7 +44,7 @@ export const useAuthStore = create((set) => ({
         try {
             const response = await axios.post("/auth/login", { email, password });
             if (response.data.token) {
-                localStorage.setItem('token', response.data.token);
+                sessionStorage.setItem('token', response.data.token);
             }
             set({
                 user: response.data.user,
@@ -57,7 +62,7 @@ export const useAuthStore = create((set) => ({
         set({ isLoading: true, error: null });
         try {
             await axios.post("/auth/logout");
-            localStorage.removeItem('token');
+            sessionStorage.removeItem('token');
             set({ user: null, isAuthenticated: false, isLoading: false });
         } catch (error) {
             set({ error: "Error logging out", isLoading: false });

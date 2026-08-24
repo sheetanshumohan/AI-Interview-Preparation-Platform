@@ -71,7 +71,7 @@ function App() {
     const params = new URLSearchParams(window.location.search);
     const token = params.get('token');
     if (token) {
-        localStorage.setItem('token', token);
+        sessionStorage.setItem('token', token);
         // Clean URL parameter
         const newUrl = window.location.pathname + window.location.hash;
         window.history.replaceState({}, document.title, newUrl);

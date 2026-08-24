@@ -11,7 +11,8 @@ const FloatingInput = ({
     icon: Icon, 
     required = false,
     showPasswordToggle = false,
-    error = ""
+    error = "",
+    ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -38,6 +39,7 @@ const FloatingInput = ({
             required={required}
             placeholder=" "
             className="peer w-full bg-transparent border-none text-[var(--text-main)] focus:ring-0 p-0 text-base font-semibold placeholder-transparent"
+            {...props}
           />
           <label
             htmlFor={id}
